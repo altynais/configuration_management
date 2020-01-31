@@ -1,0 +1,10 @@
+---
+- hosts:
+  tasks:
+    - name: Copy files
+      copy:
+        src: /tmp/test
+        dest: /tmp/newfile
+      become: true
+      become_method: sudo
+      
