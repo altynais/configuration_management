@@ -1,6 +1,6 @@
 ---
 - name: Downloads files
-  hosts: all
+  hosts: localhost
   become: true
   become_method: sudo
   vars_prompt:
