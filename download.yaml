@@ -14,4 +14,4 @@
     - name: Doanload 1 package
       get_url:
         url: "{{URL}}"
-        dest: /tmp/
+        dest: "{{Destination}}"
