@@ -6,3 +6,4 @@
         ec2:
           instance_ids: i-04eda78f2b388d591
           state: absent
+          region: us-east-2
