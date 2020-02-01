@@ -1,8 +1,5 @@
 ---
 - name: Downloads files
-  hosts: localhost
-  become: true
-  become_method: sudo
   vars_prompt:
     - name: URL
       prompt: "Enter URL"
@@ -10,6 +7,14 @@
     - name: Destination
       prompt: "Enter path"
       private: false
+    - name: HOST
+      prompt: "Enter host"
+      private: false
+
+  hosts: "{{HOST}}"
+  become: true
+  become_method: sudo
+  
   tasks:
     - name: Doanload 1 package
       get_url:
