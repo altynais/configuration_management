@@ -7,6 +7,9 @@
     - name: URL
       prompt: "Enter URL: "
       private: false
+    - name: Destination
+      prompt: "Enter path: "
+      private: false
   tasks:
     - name: Doanload 1 package
       get_url:
