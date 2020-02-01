@@ -5,10 +5,10 @@
   become_method: sudo
   vars_prompt:
     - name: URL
-      prompt: "Enter URL: "
+      prompt: "Enter URL"
       private: false
     - name: Destination
-      prompt: "Enter path: "
+      prompt: "Enter path"
       private: false
   tasks:
     - name: Doanload 1 package
