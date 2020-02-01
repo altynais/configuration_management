@@ -4,8 +4,9 @@
   tasks:
     - name: Create instances
       ec2:
-        key_name: my_key
+        key_name: WinKey
         instance_type: t2.micro
-        image: ami-0d542ef84ec55d71c
+        image: ami-0f2b4fc905b0bd1f1
         count: 3
         vpc_subnet_id: subnet-1bc02870
+        region: us-east-1
