@@ -8,10 +8,11 @@
       - name: REGION
         prompt: "Region of the instance"
         private: no
+
     hosts: localhost
     tasks:
       - name: Terminate ec2
         ec2:
-          instance_ids: '"{{ID}}"'
+          instance_ids: "{{ID}}"
           state: absent
           region: "{{REGION}}"
