@@ -1,0 +1,11 @@
+---
+- name: Create EC2
+  hosts: localhost
+  tasks:
+    - name: Create instances
+      ec2:
+        key_name: my_key
+        instance_type: t2.micro
+        image: ami-0d542ef84ec55d71c
+        count: 3
+        vpc_subnet_id: subnet-1bc02870
