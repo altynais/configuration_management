@@ -3,6 +3,10 @@
   hosts: all
   become: true
   become_method: sudo
+  vars_prompt:
+    - name: URL
+      prompt: "Enter URL: "
+      private: false
   tasks:
     - name: Doanload 1 package
       get_url:
