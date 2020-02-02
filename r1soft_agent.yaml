@@ -1,5 +1,6 @@
 ---
   - name: Install r1soft agent
+    hosts: target
     become: true
     become_method: sudo
     tasks:
