@@ -1,0 +1,23 @@
+---
+  - name: Install r1soft agent
+    become: true
+    become_method: sudo
+    tasks:
+      - name: Create a repository
+        copy:
+          src: r1soft.repo
+          dest: /etc/yum.repos.d/r1soft.repo
+
+      - name: Install r1soft agent
+        package:
+          name: serverbackup-enterprise-agent
+          state: latest
+
+      - name: Start the service
+        systemd:
+          name: sbm-agent
+          state: restarted
+
+      - name: Get Key
+        shell: "r1soft setup --get-key http://3.133.121.171/"
+            

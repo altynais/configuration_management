@@ -1,12 +1,15 @@
 ---
 - name: Create EC2
   hosts: localhost
+  vars_files:
+    - env/ec2_vars
   tasks:
     - name: Create instances
       ec2:
-        key_name: tower-key
-        instance_type: t2.micro
-        image: ami-0f2b4fc905b0bd1f1
-        count: 3
-        vpc_subnet_id: subnet-0978d32ebc20bc0c7
-        region: us-east-1
+        key_name: "{{key_name}}"
+        instance_type: "{{instance_type}}"
+        image: "{{image}}"
+        count: "{{count}}"
+        vpc_subnet_id: "{{vpc_subnet_id}}"
+        region: "{{region}}"
+        # user_data: "{{ lookup('file', 'user_data.sh') }}"
