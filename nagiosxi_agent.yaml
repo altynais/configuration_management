@@ -1,0 +1,46 @@
+---
+- name: Install nagios agent 
+  hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Create repo on CentOS 6
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+      shell: "rpm -Uvh http://repo.nagios.com/nagios/6/nagios-repo-6-3.el6.noarch.rpm"
+
+    - name: Install ncpa on CentOS 6
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+      package:
+        name: ncpa
+        state: present
+      notify: NCPA_CENTOS_6
+
+    - name: Modify configuration file
+      lineinfile:
+        path: /usr/local/ncpa/etc/ncpa.cfg
+        regexp: "community_string = mytoken"
+        line: community_string = PASSWORD
+
+
+    - name: Create repo
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+      shell: "rpm -Uvh http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
+
+    - name: Install ncpa on CentOS 7
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+      package:
+        name: ncpa
+        state: present
+      notify: NCPA_CENTOS_6  
+
+  handlers:
+    - name: NCPA_CENTOS_6
+      service:
+        name: ncpa_listener
+        state: restarted
+
+    - name: NCPA_CENTOS_7
+      service:
+        name: ncpa_listener
+        state: restarted
+
