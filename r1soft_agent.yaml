@@ -6,70 +6,70 @@
   tasks: 
 # this line is for centos 7
     - block:
-      - name: Created a Repository
+      - name: Create a Repository on CentOS 7
         copy:
           src: r1soft.repo
           dest: /etc/yum.repos.d/r1soft.repo
     
-      - name: Install r1soft agent
+      - name: Install r1soft agent on CentOS 7
         package:
           name: serverbackup-enterprise-agent 
           state: present
         notify: R1SOFT_INSTALLED_ON_CENTOS_7
 
-      - name: Get key
+      - name: Get key on CentOS 7
         shell: "r1soft-setup --get-key http://3.133.121.171/"
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7" 
   
     
 # this line is for centos 6
     - block:
-      - name: Created a Repository
+      - name: Create a Repository on CentOS 6
         copy:
           src: r1soft.repo
           dest: /etc/yum.repos.d/r1soft.repo
     
-      - name: Install r1soft agent
+      - name: Install r1soft agent on CentOS 6
         package:
           name: serverbackup-enterprise-agent 
           state: present
         notify: R1SOFT_INSTALLED_ON_CENTOS_6
     
-      - name: Get key
+      - name: Get key on CentOS 6
         shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
 
 # this line is for centos 8
     - block:
-      - name: Created a Repository
+      - name: Create a Repository on CentOS 8
         copy:
           src: r1soft.repo
           dest: /etc/yum.repos.d/r1soft.repo
     
-      - name: Install r1soft agent
+      - name: Install r1soft agent on CentOS 8
         package:
           name: serverbackup-enterprise-agent 
           state: present
         notify: R1SOFT_INSTALLED_ON_CENTOS_6
     
-      - name: Get key
+      - name: Get key on CentOS 8
         shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "8"
 
 # this line is for Fedora
     - block:
-      - name: Created a Repository
+      - name: Create a Repository on Fedora
         copy:
           src: r1soft.repo
           dest: /etc/yum.repos.d/r1soft.repo
     
-      - name: Install r1soft agent
+      - name: Install r1soft agent on Fedora
         package:
           name: serverbackup-enterprise-agent 
           state: present
         notify: R1SOFT_INSTALLED_ON_CENTOS_6
     
-      - name: Get key
+      - name: Get key on Fedora
         shell: "r1soft-setup --get-key http://r1soft.acirrustech.com"
       when: ansible_distribution == "Fedora" and ansible_distribution_major_version == "28"
 
