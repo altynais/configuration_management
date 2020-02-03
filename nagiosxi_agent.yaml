@@ -19,7 +19,7 @@
       lineinfile:
         path: /usr/local/ncpa/etc/ncpa.cfg
         regexp: "community_string = mytoken"
-        line: community_string = PASSWORD
+        line: community_string = redhat
 
 
     - name: Create repo
@@ -41,6 +41,6 @@
 
     - name: NCPA_CENTOS_7
       service:
-        name: ncpa_listener
+        name: ncpa_listener.service
         state: restarted
 
