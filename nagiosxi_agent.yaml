@@ -15,13 +15,6 @@
         state: present
       notify: NCPA_CENTOS_6
 
-    - name: Modify configuration file
-      lineinfile:
-        path: /usr/local/ncpa/etc/ncpa.cfg
-        regexp: "community_string = mytoken"
-        line: community_string = redhat
-
-
     - name: Create repo
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
       shell: "rpm -Uvh http://repo.nagios.com/nagios/7/nagios-repo-7-3.el7.noarch.rpm"
@@ -31,7 +24,9 @@
       package:
         name: ncpa
         state: present
-      notify: NCPA_CENTOS_6  
+      notify: NCPA_CENTOS_7
+
+  
 
   handlers:
     - name: NCPA_CENTOS_6
@@ -39,8 +34,19 @@
         name: ncpa_listener
         state: restarted
 
+    - name: NCPA_CENTOS_6
+      lineinfile:
+        path: /usr/local/ncpa/etc/ncpa.cfg
+        regexp: "community_string = mytoken"
+        line: community_string = redhat
+
     - name: NCPA_CENTOS_7
       service:
         name: ncpa_listener.service
         state: restarted
+    - name: NCPA_CENTOS_7
+      lineinfile:
+        path: /usr/local/ncpa/etc/ncpa.cfg
+        regexp: "community_string = mytoken"
+        line: community_string = redhat
 
