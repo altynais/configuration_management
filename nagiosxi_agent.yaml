@@ -6,7 +6,9 @@
   tasks:
     - name: Create repo on CentOS 6
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
-      shell: "rpm -Uvh http://repo.nagios.com/nagios/6/nagios-repo-6-3.el6.noarch.rpm"
+      package:
+        name: "http://repo.nagios.com/nagios/6/nagios-repo-6-3.el6.noarch.rpm"
+        state: latest
 
     - name: Install ncpa on CentOS 6
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
@@ -17,7 +19,9 @@
 
     - name: Create repo
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
-      shell: "rpm -Uvh https://repo.nagios.com/nagios/7/nagios-repo-7-4.el7.noarch.rpm"
+      package:
+        name: "https://repo.nagios.com/nagios/7/nagios-repo-7-4.el7.noarch.rpm"
+        state: latest
 
     - name: Install ncpa on CentOS 7
       when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
@@ -38,7 +42,7 @@
       lineinfile:
         path: /usr/local/ncpa/etc/ncpa.cfg
         regexp: "community_string = mytoken"
-        line: community_string = redhat
+        line: "community_string = redhat"
 
     - name: NCPA_CENTOS_7
       service:
@@ -48,5 +52,5 @@
       lineinfile:
         path: /usr/local/ncpa/etc/ncpa.cfg
         regexp: "community_string = mytoken"
-        line: community_string = redhat
+        line: "community_string = redhat"
 
