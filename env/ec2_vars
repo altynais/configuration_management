@@ -1,4 +1,4 @@
-key_name: "Power-centos"
+key_name: "Tower-centos"
 instance_type: "t2.micro"
 image: "ami-0f2b4fc905b0bd1f1"
 count: "1"
