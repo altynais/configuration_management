@@ -1,0 +1,37 @@
+---
+- name: Install filebeat
+  hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - block:
+
+      - name: Download filebeat on CentOS 7
+        shell: "curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.5.2-x86_64.rpm"
+      - name: Install filebeat from with rpm
+        shell: rpm -vi filebeat-7.5.2-x86_64.rpm
+
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
+      notify: FILEBEAT_6
+
+
+    - block:
+
+      - name: Download filebeat on CentOS 7
+        shell: "curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.5.2-x86_64.rpm"
+      - name: Install filebeat from with rpm
+        shell: rpm -vi filebeat-7.5.2-x86_64.rpm
+
+      when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+      notify: FILEBEAT_7
+
+  handlers:
+    - name: FILEBEAT_6
+      service:
+        name: filebeat
+        state: restarted
+
+    - name: FILEBEAT_7
+      service:
+        name: filebeat
+        state: restarted        
